@@ -4,10 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Shelf - A Personal Library</title>
 </head>
 
 <body>
+    <header>
+        <h1 class="wordmark">THE <span>Shelf</span></h1>
+        <div class="tagline">A house library</div>
+    </header>
+
+    <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="Search by title or author…">
+        <select id="sortSelect" title="Sort books">
+            <option value="recent">Recently added</option>
+            <option value="title">Title A-Z</option>
+            <option value="author">Author A-Z</option>
+            <option value="rating">Highest rated</option>
+        </select>
+        <button class="btn-add" id="openAddBtn" type="button">+ Add a book</button>
+    </div>
 
 </body>
 
