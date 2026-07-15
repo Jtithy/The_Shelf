@@ -24,6 +24,24 @@
         <button class="btn-add" id="openAddBtn" type="button">+ Add a book</button>
     </div>
 
+    <div class="shelf-wrap">
+        <div class="shelf-grid" id="shelfGrid"></div>
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <span class="big">Your shelf is empty.</span>
+            Add the first book you've read — cover, rating, and a few honest words about it.
+        </div>
+    </div>
+
+    <!-- Detail modal -->
+    <div class="modal-overlay" id="detailOverlay">
+        <div class="card" id="detailCard">
+            <div class="card-tab">CATALOG CARD</div>
+            <button class="close-x" id="detailClose" aria-label="Close">&times;</button>
+            <div class="card-inner" id="detailContent"></div>
+        </div>
+    </div>
+
+
 </body>
 
 </html>
