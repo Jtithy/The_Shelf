@@ -1,5 +1,5 @@
 <!-- Author: Tithy -->
-<!-- Date: 2024-06-10 -->
+<!-- Date: 2026-07-15 -->
 <!-- Description: A personal library web application that allows users to add, view, and manage their book collection. -->
 
 
@@ -13,11 +13,13 @@
 </head>
 
 <body>
+    <!-- Header Section -->
     <header>
         <h1 class="wordmark">THE <span>Shelf</span></h1>
         <div class="tagline">A house library</div>
     </header>
 
+    <!-- Toolbar - Search and Sort Books -->
     <div class="toolbar">
         <input type="text" id="searchInput" placeholder="Search by title or author…">
         <select id="sortSelect" title="Sort books">
@@ -26,9 +28,11 @@
             <option value="author">Author A-Z</option>
             <option value="rating">Highest rated</option>
         </select>
+        <!-- Book Add Button -->
         <button class="btn-add" id="openAddBtn" type="button">+ Add a book</button>
     </div>
 
+    <!-- Shelf space -->
     <div class="shelf-wrap">
         <div class="shelf-grid" id="shelfGrid"></div>
         <div class="empty-state" id="emptyState">
@@ -53,6 +57,7 @@
             <button class="close-x" id="formClose" aria-label="Close">&times;</button>
             <div class="card-inner">
                 <h2 class="form-title" id="formTitle">Add a book</h2>
+                <!-- Book Form to add new books -->
                 <form id="bookForm">
                     <label for="titleInput">Title</label>
                     <input type="text" id="titleInput" class="field" maxlength="140" required>
@@ -70,6 +75,27 @@
                     <div class="cover-preview-wrap" id="coverPreviewWrap" style="display:none;">
                         <img id="coverPreview" class="cover-preview" alt="Cover preview">
                     </div>
+
+                    <label>Your rating</label>
+                    <div class="star-picker" id="starPicker">
+                        <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span
+                            data-v="4">★</span><span data-v="5">★</span>
+                    </div>
+
+                    <label for="reviewInput">Review</label>
+                    <textarea id="reviewInput" class="field" maxlength="2000"
+                        placeholder="What did you think?"></textarea>
+
+                    <div class="error-msg" id="formError"></div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelFormBtn">Cancel</button>
+                        <button type="submit" class="btn-save">Shelve it</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 </body>
