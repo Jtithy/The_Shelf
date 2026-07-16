@@ -1,3 +1,8 @@
+<!-- Author: Tithy -->
+<!-- Date: 2024-06-10 -->
+<!-- Description: A personal library web application that allows users to add, view, and manage their book collection. -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +31,7 @@
 
     <div class="shelf-wrap">
         <div class="shelf-grid" id="shelfGrid"></div>
-        <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-state" id="emptyState">
             <span class="big">Your shelf is empty.</span>
             Add the first book you've read — cover, rating, and a few honest words about it.
         </div>
@@ -40,6 +45,31 @@
             <div class="card-inner" id="detailContent"></div>
         </div>
     </div>
+
+    <!-- Add/Edit modal -->
+    <div class="modal-overlay" id="formOverlay">
+        <div class="card">
+            <div class="card-tab" id="formTab">NEW ENTRY</div>
+            <button class="close-x" id="formClose" aria-label="Close">&times;</button>
+            <div class="card-inner">
+                <h2 class="form-title" id="formTitle">Add a book</h2>
+                <form id="bookForm">
+                    <label for="titleInput">Title</label>
+                    <input type="text" id="titleInput" class="field" maxlength="140" required>
+
+                    <label for="authorInput">Author</label>
+                    <input type="text" id="authorInput" class="field" maxlength="100" required>
+
+                    <label>Cover</label>
+                    <div class="cover-row">
+                        <input type="text" id="coverUrlInput" class="field" placeholder="Paste an image URL…">
+                        <button type="button" class="file-btn" id="uploadBtn">Upload</button>
+                        <input type="file" id="coverFileInput" accept="image/*" style="display:none;">
+                    </div>
+                    <div class="hint">Or leave blank — we'll give it a plain spine instead.</div>
+                    <div class="cover-preview-wrap" id="coverPreviewWrap" style="display:none;">
+                        <img id="coverPreview" class="cover-preview" alt="Cover preview">
+                    </div>
 
 
 </body>
