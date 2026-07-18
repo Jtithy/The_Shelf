@@ -77,3 +77,61 @@ header {
     text-transform: uppercase;
     margin-top: 10px;
 }
+
+/* Toolbar */
+.toolbar {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    padding: 0 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar input[type="text"],
+.toolbar select {
+    background: var(--bg-panel);
+    border: 1px solid #4a3d2c;
+    color: var(--cream-text);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.92rem;
+}
+
+.toolbar input[type="text"] {
+    min-width: 240px;
+    flex: 1;
+    max-width: 360px;
+}
+
+.toolbar input::placeholder {
+    color: var(--cream-dim);
+}
+
+.toolbar input:focus,
+.toolbar select:focus,
+button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.btn-add {
+    background: var(--maroon);
+    color: var(--cream-text);
+    border: 1px solid #93393a;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-add:hover {
+    background: var(--maroon-dark);
+    transform: translateY(-1px);
+}
