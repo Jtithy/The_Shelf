@@ -1,0 +1,41 @@
+:root {
+    --bg-deep: #1c1712;
+    --bg-panel: #241d16;
+    --wood-ledge: #3a2c1e;
+    --wood-ledge-light: #5a4530;
+    --paper: #f1e8d3;
+    --paper-shadow: #d8caa8;
+    --ink: #2c2620;
+    --ink-soft: #5a5044;
+    --gold: #c9a227;
+    --gold-soft: #a6862a;
+    --maroon: #7c2a2a;
+    --maroon-dark: #5e1f1f;
+    --cream-text: #e9dfc4;
+    --cream-dim: #b9ad8d;
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background:
+        radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201, 162, 39, 0.14), transparent 60%),
+        var(--bg-deep);
+    color: var(--cream-text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+a {
+    color: inherit;
+}
