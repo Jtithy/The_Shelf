@@ -1,3 +1,8 @@
+/* Author: The Shelf
+* Description: A personal library for books.
+*/
+
+/* Root Variables */
 :root {
     --bg-deep: #1c1712;
     --bg-panel: #241d16;
@@ -20,6 +25,7 @@
     box-sizing: border-box;
 }
 
+/* Full Layout */
 html,
 body {
     margin: 0;
@@ -38,4 +44,36 @@ body {
 
 a {
     color: inherit;
+}
+
+/* Header */
+header {
+    padding: 55px 25px 30px;
+    text-align: center;
+    position: relative;
+}
+
+.wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 1000;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    letter-spacing: 0.01em;
+    color: var(--cream-text);
+    text-shadow: 0 0 40px rgba(201, 162, 39, 0.25);
+    margin: 0;
+}
+
+.wordmark span {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+}
+
+.tagline {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    color: var(--cream-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 10px;
 }
