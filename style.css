@@ -221,3 +221,20 @@ button:focus-visible {
     padding: 1px 4px;
     border-radius: 3px;
 }
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 70px 20px;
+    color: var(--cream-dim);
+    font-family: 'Special Elite', monospace;
+}
+
+.empty-state .big {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--cream-text);
+    margin-bottom: 10px;
+    display: block;
+}
