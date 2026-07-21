@@ -420,3 +420,154 @@ button:focus-visible {
 .btn-danger:hover {
     background: rgba(124, 42, 42, 0.1);
 }
+
+/* ---------- Form ---------- */
+.form-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0 0 18px;
+}
+
+label {
+    display: block;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-soft);
+    margin: 14px 0 6px;
+}
+
+label:first-of-type {
+    margin-top: 0;
+}
+
+input[type="text"].field,
+textarea.field {
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.92rem;
+    padding: 9px 11px;
+    border: 1px solid var(--paper-shadow);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.4);
+    color: var(--ink);
+}
+
+textarea.field {
+    min-height: 80px;
+    resize: vertical;
+    font-family: 'Fraunces', serif;
+}
+
+.cover-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cover-row input[type="text"] {
+    flex: 1;
+}
+
+.file-btn {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 9px 12px;
+    border-radius: 3px;
+    background: var(--gold);
+    color: #2c2210;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.cover-preview-wrap {
+    margin-top: 10px;
+}
+
+.cover-preview {
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.star-picker {
+    font-size: 1.6rem;
+    cursor: pointer;
+    letter-spacing: 4px;
+    color: #d3c6a0;
+}
+
+.star-picker span.on {
+    color: var(--gold-soft);
+}
+
+.form-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-save {
+    background: var(--maroon);
+    color: var(--cream-text);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background: var(--maroon-dark);
+}
+
+.btn-cancel {
+    background: transparent;
+    border: 1px solid var(--ink-soft);
+    color: var(--ink);
+    padding: 10px 18px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    cursor: pointer;
+}
+
+.hint {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.error-msg {
+    color: var(--maroon);
+    font-size: 0.78rem;
+    margin-top: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .book,
+    .btn-add,
+    .card {
+        transition: none !important;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--paper-shadow);
+    border-radius: 6px;
+}
