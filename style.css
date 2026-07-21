@@ -337,7 +337,6 @@ button:focus-visible {
 }
 
 .stamp {
-    display: inline-block;
     font-family: 'Special Elite', monospace;
     font-size: 0.68rem;
     color: var(--blush-dark);
