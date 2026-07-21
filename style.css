@@ -1,23 +1,20 @@
-/* Author: The Shelf
-* Description: A personal library for books.
-*/
-
-/* Root Variables */
 :root {
-    --bg-deep: #1c1712;
-    --bg-panel: #241d16;
-    --wood-ledge: #3a2c1e;
-    --wood-ledge-light: #5a4530;
-    --paper: #f1e8d3;
-    --paper-shadow: #d8caa8;
-    --ink: #2c2620;
-    --ink-soft: #5a5044;
-    --gold: #c9a227;
-    --gold-soft: #a6862a;
-    --maroon: #7c2a2a;
-    --maroon-dark: #5e1f1f;
-    --cream-text: #e9dfc4;
-    --cream-dim: #b9ad8d;
+    --bg: #f6f1e2;
+    --bg-panel: #fffaf0;
+    --wood-ledge: #d9c9a4;
+    --wood-ledge-light: #efe3c4;
+    --paper: #fffdf6;
+    --paper-shadow: #e7dcc0;
+    --ink: #4a3f30;
+    --ink-soft: #8a7c66;
+    --matcha: #8faa76;
+    --matcha-dark: #6d8c56;
+    --blush: #f0b9b4;
+    --blush-dark: #dd8f8a;
+    --honey: #e3ac5c;
+    --honey-soft: #c98f3f;
+    --cream-text: #4a3f30;
+    --cream-dim: #a3987f;
     font-size: 16px;
 }
 
@@ -25,7 +22,6 @@
     box-sizing: border-box;
 }
 
-/* Full Layout */
 html,
 body {
     margin: 0;
@@ -34,8 +30,8 @@ body {
 
 body {
     background:
-        radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201, 162, 39, 0.14), transparent 60%),
-        var(--bg-deep);
+        radial-gradient(ellipse 900px 500px at 50% -10%, rgba(143, 170, 118, 0.18), transparent 60%),
+        var(--bg);
     color: var(--cream-text);
     font-family: 'IBM Plex Sans', sans-serif;
     min-height: 100vh;
@@ -46,25 +42,25 @@ a {
     color: inherit;
 }
 
-/* Header */
+/* ---------- Header ---------- */
 header {
-    padding: 55px 25px 30px;
+    padding: 56px 24px 28px;
     text-align: center;
     position: relative;
 }
 
 .wordmark {
     font-family: 'Fraunces', serif;
-    font-weight: 1000;
+    font-weight: 700;
     font-size: clamp(2.4rem, 6vw, 3.6rem);
     letter-spacing: 0.01em;
-    color: var(--cream-text);
-    text-shadow: 0 0 40px rgba(201, 162, 39, 0.25);
+    color: var(--matcha-dark);
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
     margin: 0;
 }
 
 .wordmark span {
-    color: var(--gold);
+    color: var(--blush-dark);
     font-style: italic;
     font-weight: 500;
 }
@@ -78,7 +74,7 @@ header {
     margin-top: 10px;
 }
 
-/* Toolbar */
+/* ---------- Toolbar ---------- */
 .toolbar {
     max-width: 1100px;
     margin: 0 auto 20px;
@@ -93,10 +89,10 @@ header {
 .toolbar input[type="text"],
 .toolbar select {
     background: var(--bg-panel);
-    border: 1px solid #4a3d2c;
-    color: var(--cream-text);
+    border: 1px solid var(--paper-shadow);
+    color: var(--ink);
     padding: 10px 14px;
-    border-radius: 4px;
+    border-radius: 8px;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.92rem;
 }
@@ -114,16 +110,16 @@ header {
 .toolbar input:focus,
 .toolbar select:focus,
 button:focus-visible {
-    outline: 2px solid var(--gold);
+    outline: 2px solid var(--matcha);
     outline-offset: 2px;
 }
 
 .btn-add {
-    background: var(--maroon);
-    color: var(--cream-text);
-    border: 1px solid #93393a;
+    background: var(--matcha);
+    color: #fff;
+    border: 1px solid var(--matcha-dark);
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 8px;
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     font-size: 0.92rem;
@@ -132,7 +128,7 @@ button:focus-visible {
 }
 
 .btn-add:hover {
-    background: var(--maroon-dark);
+    background: var(--matcha-dark);
     transform: translateY(-1px);
 }
 
@@ -167,7 +163,7 @@ button:focus-visible {
     position: relative;
     transform: rotate(var(--tilt, 0deg));
     transition: transform 0.18s ease, filter 0.18s ease;
-    filter: drop-shadow(3px 6px 6px rgba(0, 0, 0, 0.45));
+    filter: drop-shadow(2px 5px 5px rgba(150, 130, 100, 0.35));
     margin-bottom: 4px;
 }
 
@@ -179,16 +175,16 @@ button:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 2px 4px 4px 2px;
-    border-left: 4px solid rgba(0, 0, 0, 0.25);
+    border-radius: 6px 10px 10px 6px;
+    border-left: 4px solid rgba(0, 0, 0, 0.12);
     display: block;
 }
 
 .book .spine-fallback {
     width: 100%;
     height: 100%;
-    border-radius: 2px 4px 4px 2px;
-    border-left: 4px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px 10px 10px 6px;
+    border-left: 4px solid rgba(0, 0, 0, 0.15);
     padding: 10px 6px;
     display: flex;
     flex-direction: column;
@@ -200,14 +196,14 @@ button:focus-visible {
     font-size: 0.82rem;
     font-weight: 600;
     line-height: 1.15;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .spine-fallback .a {
     font-size: 0.65rem;
     font-style: italic;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .book .stars-mini {
@@ -215,14 +211,14 @@ button:focus-visible {
     bottom: 4px;
     left: 4px;
     font-size: 0.6rem;
-    color: var(--gold);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-    background: rgba(0, 0, 0, 0.35);
+    color: var(--honey);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    background: rgba(74, 63, 48, 0.35);
     padding: 1px 4px;
     border-radius: 3px;
 }
 
-/* Empty state */
+/* ---------- Empty state ---------- */
 .empty-state {
     text-align: center;
     padding: 70px 20px;
@@ -234,16 +230,16 @@ button:focus-visible {
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 1.6rem;
-    color: var(--cream-text);
+    color: var(--matcha-dark);
     margin-bottom: 10px;
     display: block;
 }
 
-/* Modal base */
+/* ---------- Modal base ---------- */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(10, 8, 5, 0.7);
+    background: rgba(90, 80, 60, 0.35);
     display: none;
     align-items: center;
     justify-content: center;
@@ -262,24 +258,23 @@ button:focus-visible {
     max-width: 480px;
     max-height: 88vh;
     overflow-y: auto;
-    border-radius: 3px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--paper-shadow);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(140, 120, 90, 0.25), 0 0 0 1px var(--paper-shadow);
     position: relative;
-    background-image: repeating-linear-gradient(to bottom, transparent 0 34px, rgba(44, 38, 32, 0.06) 34px 35px);
 }
 
 .card-tab {
     position: absolute;
     top: -14px;
     left: 28px;
-    background: var(--gold);
-    color: #2c2210;
+    background: var(--blush);
+    color: #5a2f2c;
     font-family: 'Special Elite', monospace;
     font-size: 0.68rem;
     letter-spacing: 0.06em;
     padding: 5px 12px;
-    border-radius: 2px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .card-inner {
@@ -300,10 +295,10 @@ button:focus-visible {
 }
 
 .close-x:hover {
-    color: var(--maroon);
+    color: var(--blush-dark);
 }
 
-/* Detail card */
+/* ---------- Detail card ---------- */
 .detail-top {
     display: flex;
     gap: 18px;
@@ -313,10 +308,9 @@ button:focus-visible {
     width: 100px;
     height: 150px;
     flex-shrink: 0;
-    border-radius: 2px 4px 4px 2px;
+    border-radius: 6px 10px 10px 6px;
     object-fit: cover;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
-    border-left: 4px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 4px 8px rgba(140, 120, 90, 0.25);
 }
 
 .detail-cover.fallback {
@@ -332,6 +326,7 @@ button:focus-visible {
     font-size: 1.4rem;
     line-height: 1.2;
     margin: 0 0 4px;
+    color: var(--matcha-dark);
 }
 
 .detail-author {
@@ -342,10 +337,11 @@ button:focus-visible {
 }
 
 .stamp {
+    display: inline-block;
     font-family: 'Special Elite', monospace;
     font-size: 0.68rem;
-    color: var(--maroon);
-    border: 2px solid var(--maroon);
+    color: var(--blush-dark);
+    border: 2px solid var(--blush-dark);
     border-radius: 50%;
     width: 62px;
     height: 62px;
@@ -361,12 +357,12 @@ button:focus-visible {
 .stars-row {
     font-size: 1.3rem;
     letter-spacing: 2px;
-    color: var(--gold-soft);
+    color: var(--honey-soft);
     margin: 6px 0 2px;
 }
 
 .stars-row .off {
-    color: #d3c6a0;
+    color: #e8dcc0;
 }
 
 .review-block {
@@ -400,7 +396,7 @@ button:focus-visible {
     font-size: 0.85rem;
     font-weight: 600;
     padding: 8px 16px;
-    border-radius: 3px;
+    border-radius: 8px;
     cursor: pointer;
     border: 1px solid var(--ink-soft);
     background: transparent;
@@ -408,16 +404,16 @@ button:focus-visible {
 }
 
 .btn-danger {
-    border-color: var(--maroon);
-    color: var(--maroon);
+    border-color: var(--blush-dark);
+    color: var(--blush-dark);
 }
 
 .btn-secondary:hover {
-    background: rgba(44, 38, 32, 0.08);
+    background: rgba(143, 170, 118, 0.12);
 }
 
 .btn-danger:hover {
-    background: rgba(124, 42, 42, 0.1);
+    background: rgba(221, 143, 138, 0.15);
 }
 
 /* ---------- Form ---------- */
@@ -426,6 +422,7 @@ button:focus-visible {
     font-weight: 700;
     font-size: 1.3rem;
     margin: 0 0 18px;
+    color: var(--matcha-dark);
 }
 
 label {
@@ -449,8 +446,8 @@ textarea.field {
     font-size: 0.92rem;
     padding: 9px 11px;
     border: 1px solid var(--paper-shadow);
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
     color: var(--ink);
 }
 
@@ -475,9 +472,9 @@ textarea.field {
     font-size: 0.8rem;
     font-weight: 600;
     padding: 9px 12px;
-    border-radius: 3px;
-    background: var(--gold);
-    color: #2c2210;
+    border-radius: 8px;
+    background: var(--honey);
+    color: #4a3018;
     border: none;
     cursor: pointer;
     white-space: nowrap;
@@ -491,19 +488,19 @@ textarea.field {
     width: 70px;
     height: 100px;
     object-fit: cover;
-    border-radius: 2px;
-    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    box-shadow: 1px 3px 6px rgba(140, 120, 90, 0.3);
 }
 
 .star-picker {
     font-size: 1.6rem;
     cursor: pointer;
     letter-spacing: 4px;
-    color: #d3c6a0;
+    color: #e8dcc0;
 }
 
 .star-picker span.on {
-    color: var(--gold-soft);
+    color: var(--honey-soft);
 }
 
 .form-actions {
@@ -514,18 +511,18 @@ textarea.field {
 }
 
 .btn-save {
-    background: var(--maroon);
-    color: var(--cream-text);
+    background: var(--matcha);
+    color: #fff;
     border: none;
     padding: 10px 22px;
-    border-radius: 3px;
+    border-radius: 8px;
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
     cursor: pointer;
 }
 
 .btn-save:hover {
-    background: var(--maroon-dark);
+    background: var(--matcha-dark);
 }
 
 .btn-cancel {
@@ -533,7 +530,7 @@ textarea.field {
     border: 1px solid var(--ink-soft);
     color: var(--ink);
     padding: 10px 18px;
-    border-radius: 3px;
+    border-radius: 8px;
     font-family: 'IBM Plex Sans', sans-serif;
     cursor: pointer;
 }
@@ -546,7 +543,7 @@ textarea.field {
 }
 
 .error-msg {
-    color: var(--maroon);
+    color: var(--blush-dark);
     font-size: 0.78rem;
     margin-top: 8px;
     font-family: 'IBM Plex Sans', sans-serif;
