@@ -1,9 +1,9 @@
--- CREATE TABLE books(
--- id INT PRIMARY KEY AUTO_INCREMENT,
--- title VARCHAR(200),
--- author VARCHAR(150),
--- cover TEXT,
--- rating INT,
--- review TEXT,
--- dateAdded BIGINT
--- );
+CREATE TABLE books(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200),
+    author VARCHAR(150),
+    cover TEXT,
+    rating INT,
+    review TEXT,
+    dateAdded BIGINT
+);
