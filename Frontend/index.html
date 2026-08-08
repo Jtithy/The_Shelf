@@ -1,0 +1,93 @@
+<!-- Author: Tithy -->
+<!-- Date: 2026-08-08 -->
+<!-- Description: A personal library web application that allows users to add, view, and manage their book collection. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shelf - A Personal Library</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="wordmark">The <span>Shelf</span></h1>
+        <div class="tagline">a house library</div>
+    </header>
+
+    <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="Search by title or author...">
+        <select id="sortSelect" aria-label="Sort books">
+            <option value="recent">Recently added</option>
+            <option value="title">Title A-Z</option>
+            <option value="author">Author A-Z</option>
+            <option value="rating">Highest rated</option>
+        </select>
+        <button class="btn-add" id="openAddBtn" type="button">+ Add a book</button>
+    </div>
+
+    <div class="shelf-wrap">
+        <div class="shelf-grid" id="shelfGrid"></div>
+        <div class="empty-state" id="emptyState">
+            <span class="big">Your shelf is empty.</span>
+            Add the first book you've read - cover, rating, and a few honest words about it.
+        </div>
+    </div>
+
+    <!--Detail modal-->
+    <div class="modal-overlay" id="detailOverlay">
+        <div class="card" id="detailCard">
+            <div class="card-tab">Catalog Card</div>
+            <button class="close-x" id="detailClose" aria-label="Close">&time;</button>
+            <div class="card-inner" id="detalContent"></div>
+        </div>
+    </div>
+
+    <!--Add/Edit Modal-->
+    <div class="modal-overlay" id="fromOverlay">
+        <div class="card">
+            <div class="card-tab" id="fromTab">New Entry</div>
+            <button class="close-x" id="formClose" aria-label="Close">&time;</button>
+            <div class="card-inner">
+                <h2 class="from-title" id="formTitle">Add a book</h2>
+                <form id="bookForm">
+                    <label for="titleInput">Title</label>
+                    <input type="text" id="titleInput" class="field" maxlength="150" required>
+
+                    <label for="authorInput">Author</label>
+                    <input type="text" id="authorInput" class="field" maxlength="100" required>
+
+                    <label for="coverURLInput">Cover</label>
+                    <div class="cover-row">
+                        <input type="text" id="coverURLInput" class="field" placeholder="Paste an image URL here...">
+                        <button type="button" class="file-btn" id="uploadBtn">Upload</button>
+                        <input type="file" id="coverFileInput" accept="image/*" aria-label="Upload cover image">
+                    </div>
+                    <div class="hint">Or leave blank.</div>
+                    <div class="cover-preview-wrap" id="coverPreviewWrap">
+                        <img id="coverPreview" class="cover-preview" alt="CoverPreview">
+                    </div>
+                    <label>Your rating</label>
+                    <div class="start-picker" id="starPicker">
+                        <span data-v="1">★</span><span data-v="2">★★</span><span data-v="3">★★★</span><span
+                            data-v="4">★★★★</span><span data-v="5">★★★★★</span>
+                    </div>
+
+                    <label for="reviewInput">Review</label>
+                    <textarea id="reviewInput" class="field" maxlength="2000"
+                        placeholder="What did you think?"></textarea>
+                    <div class="error-msg" id="formError"></div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelFormBtn">Cancel</button>
+                        <button type="submit" class="btn-save">Shelve it</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
