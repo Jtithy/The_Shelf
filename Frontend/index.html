@@ -41,18 +41,18 @@
     <div class="modal-overlay" id="detailOverlay">
         <div class="card" id="detailCard">
             <div class="card-tab">Catalog Card</div>
-            <button class="close-x" id="detailClose" aria-label="Close">&time;</button>
-            <div class="card-inner" id="detalContent"></div>
+            <button class="close-x" id="detailClose" aria-label="Close">&times;;</button>
+            <div class="card-inner" id="detailContent"></div>
         </div>
     </div>
 
     <!--Add/Edit Modal-->
-    <div class="modal-overlay" id="fromOverlay">
+    <div class="modal-overlay" id="formOverlay">
         <div class="card">
-            <div class="card-tab" id="fromTab">New Entry</div>
-            <button class="close-x" id="formClose" aria-label="Close">&time;</button>
+            <div class="card-tab" id="formTab">New Entry</div>
+            <button class="close-x" id="formClose" aria-label="Close">&times;</button>
             <div class="card-inner">
-                <h2 class="from-title" id="formTitle">Add a book</h2>
+                <h2 class="form-title" id="formTitle">Add a book</h2>
                 <form id="bookForm">
                     <label for="titleInput">Title</label>
                     <input type="text" id="titleInput" class="field" maxlength="150" required>
@@ -60,9 +60,9 @@
                     <label for="authorInput">Author</label>
                     <input type="text" id="authorInput" class="field" maxlength="100" required>
 
-                    <label for="coverURLInput">Cover</label>
+                    <label for="coverUrlInput">Cover</label>
                     <div class="cover-row">
-                        <input type="text" id="coverURLInput" class="field" placeholder="Paste an image URL here...">
+                        <input type="text" id="coverUrlInput" class="field" placeholder="Paste an image URL here...">
                         <button type="button" class="file-btn" id="uploadBtn">Upload</button>
                         <input type="file" id="coverFileInput" accept="image/*" aria-label="Upload cover image">
                     </div>
@@ -71,9 +71,9 @@
                         <img id="coverPreview" class="cover-preview" alt="CoverPreview">
                     </div>
                     <label>Your rating</label>
-                    <div class="start-picker" id="starPicker">
-                        <span data-v="1">★</span><span data-v="2">★★</span><span data-v="3">★★★</span><span
-                            data-v="4">★★★★</span><span data-v="5">★★★★★</span>
+                    <div class="star-picker" id="starPicker">
+                        <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span
+                            data-v="4">★</span><span data-v="5">★</span>
                     </div>
 
                     <label for="reviewInput">Review</label>
