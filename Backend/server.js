@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 //Get All Books
-app.get("/api?books", (req, res) => {
+app.get("/api/books", (req, res) => {
     const sql = `
     SELECT
         id,
@@ -40,6 +40,53 @@ app.get("/api?books", (req, res) => {
             });
         }
         res.json(results);
+    });
+});
+
+//Post new books
+app.post("/api/books", (req, res) => {
+    const {
+        title, author, cover, rating, review, dateAdded
+    } = req.body;
+
+    //Validate feilds
+    if (!title || !author || !rating || !review) {
+        return res.status(400).json({
+            message: "Title, author, rating and review are required fields."
+        });
+    }
+
+    //SQL Insertion Query
+    const sql = `
+    INSERT INTO books 
+    (title, author, cover, rating, review, dateAdded)
+    VALUES (?, ?, ?, ?, ?, ?)`;
+
+    const values = [
+        title, author, cover || 0, rating, review, dateAdded || Date.now()
+    ];
+
+    //Execute the query
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error("Error adding books: ", err);
+            return res.status(500).json({
+                message: "Failed to add book to the database."
+            });
+        }
+
+        //Return newly added book
+        const newBook = {
+            id: result.insertId,
+            title: title,
+            author: author,
+            cover: cover || "",
+            rating: Number(rating),
+            review: review,
+            dateAdded: Number(dateAdded) || Date.now()
+        };
+
+        res.status(201).json(newBook);
     });
 });
 
