@@ -1,9 +1,12 @@
-CREATE TABLE books(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(200),
-    author VARCHAR(150),
-    cover TEXT,
-    rating INT,
+CREATE DATABASE IF NOT EXISTS the_shelf;
+USE the_shelf;
+CREATE TABLE IF NOT EXISTS books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    author VARCHAR(150) NOT NULL,
+    cover LONGTEXT,
+    rating INT DEFAULT 0,
     review TEXT,
-    dateAdded BIGINT
+    dateAdded BIGINT NOT NULL
 );
+DESCRIBE books;
