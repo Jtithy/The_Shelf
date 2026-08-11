@@ -9,4 +9,3 @@ CREATE TABLE IF NOT EXISTS books (
     review TEXT,
     dateAdded BIGINT NOT NULL
 );
-DESCRIBE books;

@@ -157,6 +157,37 @@ app.put("/api/books/:id", (req, res) => {
     });
 });
 
+//Delete book
+app.delete("/api/books/:id", (req, res) => {
+    const id = req.params.id;
+
+    //SQL Deletion Query
+    const sql = `
+    DELETE FROM books WHERE id = ?`;
+
+    db.query(sql, [id], (err, result) => {
+        if (err) {
+            console.error("Error deleting book.", err);
+
+            return res.status(500).json({
+                message: "Failed to delete book from the database."
+            });
+        }
+
+        if (result.affectedRows === 0) {
+
+            return res.status(404).json({
+                message: "Book not found."
+            });
+        }
+
+        res.json({
+            message: "Book deleted successfully.",
+            id: Number(id)
+        });
+    });
+});
+
 //Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
