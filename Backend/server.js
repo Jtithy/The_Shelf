@@ -90,6 +90,73 @@ app.post("/api/books", (req, res) => {
     });
 });
 
+//PUT req to update book
+//Update Book
+app.put("/api/books/:id", (req, res) => {
+    const id = req.params.id;
+    const {
+        title, author, cover, rating, review, dateAdded
+    } = req.body;
+
+    //Variable Fields
+    const sql = `
+    UPDATE books
+    SET 
+        title = ?,
+        author = ?,
+        cover = ?,
+        rating = ?,
+        review = ?,
+        dateAdded = ?
+    WHERE id = ?`;
+
+    const values = [
+        title, author, cover || "", Number(rating), review, Number(dateAdded) || Date.now(), id
+    ];
+
+    //Execute query
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error("Error updating book.", err);
+
+            return res.status(500).json({
+                message: "Failed to update book in the database."
+            });
+        }
+
+        //Check book existance
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "Book not found."
+            });
+        }
+
+        //Get Updated book
+        const selectSql = `
+        SELECT
+            id,
+            title,
+            author,
+            cover,
+            rating,
+            review,
+            dateAdded
+        FROM books
+        WHERE id = ?`;
+
+        db.query(selectSql, [id], (selectErr, rows) => {
+            if (selectErr) {
+                console.error("Error retrieving updated book.", selectErr);
+
+                return res.status(500).json({
+                    message: "Failed to retrieve updated book from the database."
+                });
+            }
+            res.json(rows[0]);
+        });
+    });
+});
+
 //Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
