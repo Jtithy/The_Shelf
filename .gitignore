@@ -5,6 +5,7 @@ Backend/.env
 Backend/node_modules/
 
 # SQLite database
+Backend/data/
 Backend/data/*.db
 Backend/data/*.db-shm
 Backend/data/*.db-wal

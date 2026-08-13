@@ -1,21 +1,40 @@
-const mysql = require("mysql2");
-require("dotenv").config();
+const Database = require("better-sqlite3");
+const path = require("path");
+const fs = require("fs");
 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT
-});
+// Database folder
+const dataDir = path.join(__dirname, "data");
 
-db.connect((err) => {
-    if (err) {
-        console.error("MySQL connection failed.");
-        console.error(err.message);
-        return;
-    }
-    console.log("MySQL connected successfully!");
-});
+// Create data folder if it doesn't exist
+if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+}
+
+// Database file
+const dbPath = path.join(dataDir, "the_shelf.db");
+
+// Connect to SQLite
+const db = new Database(dbPath);
+
+console.log("SQLite database connected successfully!");
+console.log(`Database: ${dbPath}`);
+
+// Enable foreign keys
+db.pragma("foreign_keys = ON");
+
+// Create books table if it doesn't exist
+db.prepare(`
+    CREATE TABLE IF NOT EXISTS books (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        author TEXT NOT NULL,
+        cover TEXT DEFAULT '',
+        rating INTEGER NOT NULL,
+        review TEXT NOT NULL,
+        dateAdded INTEGER NOT NULL
+    )
+`).run();
+
+console.log("Books table is ready.");
 
 module.exports = db;

@@ -20,162 +20,182 @@ app.get("/", (req, res) => {
 
 //Get All Books
 app.get("/api/books", (req, res) => {
-    const sql = `
-    SELECT
-        id,
+    try {
+        const sql = `
+            SELECT
+                id,
+                title,
+                author,
+                cover,
+                rating,
+                review,
+                dateAdded
+            FROM books
+            ORDER BY dateAdded DESC
+        `;
+
+        const books = db.prepare(sql).all();
+
+        res.json(books);
+
+    } catch (err) {
+        console.error("Error retrieving books:", err);
+
+        res.status(500).json({
+            message: "Failed to retrieve books from the database."
+        });
+    }
+});
+
+//Post new books
+app.post("/api/books", (req, res) => {
+    const {
         title,
         author,
         cover,
         rating,
         review,
         dateAdded
-    FROM books
-    ORDER BY dateADDED DESC`;
-
-    db.query(sql, (err, results) => {
-        if (err) {
-            console.error("Error retrieving books: ", err);
-            return res.status(500).json({
-                message: "Failed to retrieve books from the database."
-            });
-        }
-        res.json(results);
-    });
-});
-
-//Post new books
-app.post("/api/books", (req, res) => {
-    const {
-        title, author, cover, rating, review, dateAdded
     } = req.body;
 
-    //Validate feilds
+    // Validate required fields
     if (!title || !author || !rating || !review) {
         return res.status(400).json({
             message: "Title, author, rating and review are required fields."
         });
     }
 
-    //SQL Insertion Query
-    const sql = `
-    INSERT INTO books 
-    (title, author, cover, rating, review, dateAdded)
-    VALUES (?, ?, ?, ?, ?, ?)`;
+    try {
+        const sql = `
+            INSERT INTO books
+            (title, author, cover, rating, review, dateAdded)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `;
 
-    const values = [
-        title, author, cover || 0, rating, review, dateAdded || Date.now()
-    ];
+        const finalDateAdded = Number(dateAdded) || Date.now();
 
-    //Execute the query
-    db.query(sql, values, (err, result) => {
-        if (err) {
-            console.error("Error adding books: ", err);
-            return res.status(500).json({
-                message: "Failed to add book to the database."
-            });
-        }
+        const result = db.prepare(sql).run(
+            title,
+            author,
+            cover || "",
+            Number(rating),
+            review,
+            finalDateAdded
+        );
 
-        //Return newly added book
-        const newBook = {
-            id: result.insertId,
-            title: title,
-            author: author,
-            cover: cover || "",
-            rating: Number(rating),
-            review: review,
-            dateAdded: Number(dateAdded) || Date.now()
-        };
+        // Get the newly created book
+        const newBook = db
+            .prepare(`
+                SELECT
+                    id,
+                    title,
+                    author,
+                    cover,
+                    rating,
+                    review,
+                    dateAdded
+                FROM books
+                WHERE id = ?
+            `)
+            .get(result.lastInsertRowid);
 
         res.status(201).json(newBook);
-    });
+
+    } catch (err) {
+        console.error("Error adding book:", err);
+
+        res.status(500).json({
+            message: "Failed to add book to the database."
+        });
+    }
 });
 
 //PUT req to update book
-//Update Book
+// Update Book
 app.put("/api/books/:id", (req, res) => {
     const id = req.params.id;
+
     const {
-        title, author, cover, rating, review, dateAdded
+        title,
+        author,
+        cover,
+        rating,
+        review,
+        dateAdded
     } = req.body;
 
-    //Variable Fields
-    const sql = `
-    UPDATE books
-    SET 
-        title = ?,
-        author = ?,
-        cover = ?,
-        rating = ?,
-        review = ?,
-        dateAdded = ?
-    WHERE id = ?`;
+    try {
+        // Update the book
+        const sql = `
+            UPDATE books
+            SET
+                title = ?,
+                author = ?,
+                cover = ?,
+                rating = ?,
+                review = ?,
+                dateAdded = ?
+            WHERE id = ?
+        `;
 
-    const values = [
-        title, author, cover || "", Number(rating), review, Number(dateAdded) || Date.now(), id
-    ];
+        const result = db.prepare(sql).run(
+            title,
+            author,
+            cover || "",
+            Number(rating),
+            review,
+            Number(dateAdded) || Date.now(),
+            id
+        );
 
-    //Execute query
-    db.query(sql, values, (err, result) => {
-        if (err) {
-            console.error("Error updating book.", err);
-
-            return res.status(500).json({
-                message: "Failed to update book in the database."
-            });
-        }
-
-        //Check book existance
-        if (result.affectedRows === 0) {
+        // Check whether the book exists
+        if (result.changes === 0) {
             return res.status(404).json({
                 message: "Book not found."
             });
         }
 
-        //Get Updated book
-        const selectSql = `
-        SELECT
-            id,
-            title,
-            author,
-            cover,
-            rating,
-            review,
-            dateAdded
-        FROM books
-        WHERE id = ?`;
+        // Get the updated book
+        const updatedBook = db
+            .prepare(`
+                SELECT
+                    id,
+                    title,
+                    author,
+                    cover,
+                    rating,
+                    review,
+                    dateAdded
+                FROM books
+                WHERE id = ?
+            `)
+            .get(id);
 
-        db.query(selectSql, [id], (selectErr, rows) => {
-            if (selectErr) {
-                console.error("Error retrieving updated book.", selectErr);
+        res.json(updatedBook);
 
-                return res.status(500).json({
-                    message: "Failed to retrieve updated book from the database."
-                });
-            }
-            res.json(rows[0]);
+    } catch (err) {
+        console.error("Error updating book:", err);
+
+        res.status(500).json({
+            message: "Failed to update book in the database."
         });
-    });
+    }
 });
 
-//Delete book
+// Delete Book
 app.delete("/api/books/:id", (req, res) => {
     const id = req.params.id;
 
-    //SQL Deletion Query
-    const sql = `
-    DELETE FROM books WHERE id = ?`;
+    try {
+        const sql = `
+            DELETE FROM books
+            WHERE id = ?
+        `;
 
-    db.query(sql, [id], (err, result) => {
-        if (err) {
-            console.error("Error deleting book.", err);
+        const result = db.prepare(sql).run(id);
 
-            return res.status(500).json({
-                message: "Failed to delete book from the database."
-            });
-        }
-
-        if (result.affectedRows === 0) {
-
+        // Check whether the book existed
+        if (result.changes === 0) {
             return res.status(404).json({
                 message: "Book not found."
             });
@@ -185,7 +205,14 @@ app.delete("/api/books/:id", (req, res) => {
             message: "Book deleted successfully.",
             id: Number(id)
         });
-    });
+
+    } catch (err) {
+        console.error("Error deleting book:", err);
+
+        res.status(500).json({
+            message: "Failed to delete book from the database."
+        });
+    }
 });
 
 //Server
