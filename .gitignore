@@ -4,6 +4,11 @@ Backend/.env
 # Node.js dependencies
 Backend/node_modules/
 
+# SQLite database
+Backend/data/*.db
+Backend/data/*.db-shm
+Backend/data/*.db-wal
+
 # Debug / logs
 *.log
 npm-debug.log*
