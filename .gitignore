@@ -1,6 +1,9 @@
 # Environment variables
 Backend/.env
 
+#Electron dependencies
+node_modules/
+
 # Node.js dependencies
 Backend/node_modules/
 
