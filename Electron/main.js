@@ -32,24 +32,52 @@ function startBackend() {
     });
 }
 
-//If backend is running???
+
+//If backend is running
+function waitForBackend(callback) {
+    const http = require("http");
+
+    const request = http.get("http://localhost:3000", (res) => {
+        console.log("Backend is ready!");
+
+        if (callback) {
+            callback();
+        }
+    });
+
+    request.on("error", () => {
+        console.log("Waiting for backend...");
+
+        setTimeout(() => {
+            waitForBackend(callback);
+        }, 500);
+    });
+}
+
+//Electron window
 function createWindow() {
-    const win = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
-        webPreference: {
+
+        webPreferences: {
             contextIsolation: true,
             nodeIntegration: false
         }
     });
 
-    //Load index.html
-
-    win.loadFile(path.join(__dirname, "..", "Frontend", "index.html"));
+    mainWindow.loadFile(
+        path.join(__dirname, "..", "Frontend", "index.html")
+    );
 }
 
+// Start application
 app.whenReady().then(() => {
-    createWindow();
+    startBackend();
+
+    waitForBackend(() => {
+        createWindow();
+    });
 
     app.on("activate", () => {
         if (BrowserWindow.getAllWindows().length === 0) {
@@ -58,7 +86,13 @@ app.whenReady().then(() => {
     });
 });
 
+// Close backend when Electron closes
 app.on("window-all-closed", () => {
+    if (backendProcess) {
+        backendProcess.kill();
+        backendProcess = null;
+    }
+
     if (process.platform !== "darwin") {
         app.quit();
     }
