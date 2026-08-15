@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 //Get All Books
-app.get("/api/books/:id", (req, res) => {
+app.get("/api/books/", (req, res) => {
     try {
         const sql = `
             SELECT
