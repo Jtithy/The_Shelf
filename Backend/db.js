@@ -2,24 +2,29 @@ const Database = require("better-sqlite3");
 const path = require("path");
 const fs = require("fs");
 
-// Database folder
-const dataDir = path.join(__dirname, "data");
+const defaultDataDir = path.join(__dirname, "data");
+const defaultDatabasePath = path.join(
+    defaultDataDir,
+    "the_shelf.db"
+);
 
-// Create data folder if it doesn't exist
-if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-}
+// Use Electron's database location when provided.
+// Otherwise use the normal development location.
+const databasePath =
+    process.env.THE_SHELF_DB_PATH || defaultDatabasePath;
 
-// Database file
-const dbPath = path.join(dataDir, "the_shelf.db");
+// Make sure the parent directory exists.
+fs.mkdirSync(path.dirname(databasePath), {
+    recursive: true
+});
 
 // Connect to SQLite
-const db = new Database(dbPath);
+const db = new Database(databasePath);
 
 console.log("SQLite database connected successfully!");
-console.log("Database:", dbPath);
+console.log("Database:", databasePath);
 
-// Create books table if it doesn't exist
+// Create books table if it doesn't exist.
 db.exec(`
     CREATE TABLE IF NOT EXISTS books (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

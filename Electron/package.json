@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "dist": "electron-builder"
+    "build": "electron-builder"
   },
   "devDependencies": {
     "electron": "^43.4.0",
@@ -19,9 +19,21 @@
     },
     "files": [
       "main.js",
-      "package.json",
-      "../Frontend/**/*",
-      "../Backend/**/*"
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../Backend",
+        "to": "Backend",
+        "filter": [
+          "**/*",
+          "!data/the_shelf.db"
+        ]
+      },
+      {
+        "from": "../Frontend",
+        "to": "Frontend"
+      }
     ],
     "win": {
       "target": "nsis"

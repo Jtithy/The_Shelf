@@ -1,13 +1,70 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const { spawn } = require("child_process");
+const http = require("http");
 
 let mainWindow;
 let backendProcess;
 
-//Express Backend server
+// Copy the existing development database to Electron's
+// writable user-data folder on first launch.
+function prepareDatabase() {
+    const sourceDatabase = path.join(
+        __dirname,
+        "..",
+        "Backend",
+        "data",
+        "the_shelf.db"
+    );
+
+    const targetDatabase = path.join(
+        app.getPath("userData"),
+        "the_shelf.db"
+    );
+
+    const fs = require("fs");
+
+    // Only copy if the Electron database does not already exist.
+    if (!fs.existsSync(targetDatabase)) {
+
+        if (fs.existsSync(sourceDatabase)) {
+
+            fs.mkdirSync(
+                path.dirname(targetDatabase),
+                { recursive: true }
+            );
+
+            fs.copyFileSync(
+                sourceDatabase,
+                targetDatabase
+            );
+
+            console.log("Existing SQLite database copied.");
+            console.log("From:", sourceDatabase);
+            console.log("To:", targetDatabase);
+
+        } else {
+            console.log("No existing SQLite database found.");
+        }
+
+    } else {
+        console.log("Electron SQLite database already exists.");
+    }
+}
+
+// Express Backend server
 function startBackend() {
-    const backendPath = path.join(__dirname, "..", "Backend");
+
+    let backendPath;
+
+    if (app.isPackaged) {
+        // Packaged application
+        backendPath = path.join(process.resourcesPath, "Backend");
+    } else {
+        // Development
+        backendPath = path.join(__dirname, "..", "Backend");
+    }
+
     const serverPath = path.join(backendPath, "server.js");
 
     // SQLite database location
@@ -17,6 +74,7 @@ function startBackend() {
     );
 
     console.log("Starting The_Shelf backend..");
+    console.log("Backend path:", backendPath);
     console.log("SQLite database:", databasePath);
 
     backendProcess = spawn(
@@ -45,19 +103,23 @@ function startBackend() {
 }
 
 
-//If backend is running
+// Wait for backend
 function waitForBackend(callback) {
-    const http = require("http");
 
-    const request = http.get("http://localhost:3000", (res) => {
-        console.log("Backend is ready!");
+    const request = http.get(
+        "http://localhost:3000",
+        (res) => {
 
-        if (callback) {
-            callback();
+            console.log("Backend is ready!");
+
+            if (callback) {
+                callback();
+            }
         }
-    });
+    );
 
     request.on("error", () => {
+
         console.log("Waiting for backend...");
 
         setTimeout(() => {
@@ -66,8 +128,29 @@ function waitForBackend(callback) {
     });
 }
 
-//Electron window
+
+// Electron window
 function createWindow() {
+
+    let frontendPath;
+
+    if (app.isPackaged) {
+        // Packaged application
+        frontendPath = path.join(
+            process.resourcesPath,
+            "Frontend",
+            "index.html"
+        );
+    } else {
+        // Development
+        frontendPath = path.join(
+            __dirname,
+            "..",
+            "Frontend",
+            "index.html"
+        );
+    }
+
     mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
@@ -78,13 +161,15 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadFile(
-        path.join(__dirname, "..", "Frontend", "index.html")
-    );
+    mainWindow.loadFile(frontendPath);
 }
+
 
 // Start application
 app.whenReady().then(() => {
+
+    prepareDatabase();
+
     startBackend();
 
     waitForBackend(() => {
@@ -92,14 +177,17 @@ app.whenReady().then(() => {
     });
 
     app.on("activate", () => {
+
         if (BrowserWindow.getAllWindows().length === 0) {
             createWindow();
         }
     });
 });
 
+
 // Close backend when Electron closes
 app.on("window-all-closed", () => {
+
     if (backendProcess) {
         backendProcess.kill();
         backendProcess = null;
