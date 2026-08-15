@@ -2,7 +2,7 @@
 Backend/.env
 
 #Electron dependencies
-node_modules/
+Electron/node_modules/
 
 # Node.js dependencies
 Backend/node_modules/
@@ -19,6 +19,7 @@ npm-debug.log*
 
 # VS Code
 .vscode/
+.vscode/*
 
 # OS files
 .DS_Store
