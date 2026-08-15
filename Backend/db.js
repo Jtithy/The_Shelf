@@ -17,13 +17,10 @@ const dbPath = path.join(dataDir, "the_shelf.db");
 const db = new Database(dbPath);
 
 console.log("SQLite database connected successfully!");
-console.log(`Database: ${dbPath}`);
-
-// Enable foreign keys
-db.pragma("foreign_keys = ON");
+console.log("Database:", dbPath);
 
 // Create books table if it doesn't exist
-db.prepare(`
+db.exec(`
     CREATE TABLE IF NOT EXISTS books (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
@@ -33,7 +30,7 @@ db.prepare(`
         review TEXT NOT NULL,
         dateAdded INTEGER NOT NULL
     )
-`).run();
+`);
 
 console.log("Books table is ready.");
 

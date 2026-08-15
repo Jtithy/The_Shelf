@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const { spawn } = require("child_process");
-const http = require("http");
 
 let mainWindow;
 let backendProcess;
@@ -11,24 +10,37 @@ function startBackend() {
     const backendPath = path.join(__dirname, "..", "Backend");
     const serverPath = path.join(backendPath, "server.js");
 
+    // SQLite database location
+    const databasePath = path.join(
+        app.getPath("userData"),
+        "the_shelf.db"
+    );
+
     console.log("Starting The_Shelf backend..");
+    console.log("SQLite database:", databasePath);
 
     backendProcess = spawn(
         process.execPath,
         [serverPath],
         {
             cwd: backendPath,
-            env: { ...process.env, ELECTRON_RUN_AS_NODE: "1" },
+
+            env: {
+                ...process.env,
+                ELECTRON_RUN_AS_NODE: "1",
+                THE_SHELF_DB_PATH: databasePath
+            },
+
             stdio: "inherit"
         }
     );
 
     backendProcess.on("error", (error) => {
-        console.error("Failed to start backend: ", error);
+        console.error("Failed to start backend:", error);
     });
 
     backendProcess.on("exit", (code) => {
-        console.error(`Backend process exited with code ${code}`);
+        console.log(`Backend process exited with code ${code}`);
     });
 }
 
