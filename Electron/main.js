@@ -1,6 +1,38 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
+const { spawn } = require("child_process");
+const http = require("http");
 
+let mainWindow;
+let backendProcess;
+
+//Express Backend server
+function startBackend() {
+    const backendPath = path.join(__dirname, "..", "Backend");
+    const serverPath = path.join(backendPath, "server.js");
+
+    console.log("Starting The_Shelf backend..");
+
+    backendProcess = spawn(
+        process.execPath,
+        [serverPath],
+        {
+            cwd: backendPath,
+            env: { ...process.env, ELECTRON_RUN_AS_NODE: "1" },
+            stdio: "inherit"
+        }
+    );
+
+    backendProcess.on("error", (error) => {
+        console.error("Failed to start backend: ", error);
+    });
+
+    backendProcess.on("exit", (code) => {
+        console.error(`Backend process exited with code ${code}`);
+    });
+}
+
+//If backend is running???
 function createWindow() {
     const win = new BrowserWindow({
         width: 1200,
