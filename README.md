@@ -1,89 +1,327 @@
 # 📚 The Shelf – A Personal Library
 
-**The Shelf** is a modern personal library web application built with **HTML**, **CSS**, and **JavaScript**. It allows users to create and organize their own digital bookshelf by adding books, uploading cover images, rating books, writing reviews, searching, sorting, and managing their collection through an elegant and responsive interface.
+**The Shelf** is a modern personal library application that allows users to create, organize, and manage their own digital bookshelf.
 
-## ✨ Features
+Originally developed as a **frontend web application using HTML, CSS, and JavaScript**, the project has now been extended into a **full-stack desktop application**. It includes a backend server, database connectivity, and **Electron.js integration** to provide a standalone desktop experience.
 
-* 📖 Add new books to your personal library
-* ✏️ Edit existing book information
-* 🗑️ Delete books from the collection
-* 🔍 Search books by title or author
-* 📂 Sort books by:
-
-  * Recently Added
-  * Title (A–Z)
-  * Author (A–Z)
-  * Highest Rating
-* ⭐ Rate books using a 5-star rating system
-* 📝 Write personal book reviews
-* 🖼️ Add book covers using:
-
-  * Image URL
-  * Local file upload
-* 👀 Preview cover images before saving
-* 📄 View complete book details in a catalog-style modal
-* 📱 Responsive and user-friendly design
-* 📚 Empty shelf message when no books have been added
+Users can add, edit, delete, search, sort, rate, and review books through an elegant and responsive interface. The application also supports persistent data storage through a backend and database.
 
 ---
 
-## 📸 Preview
+## ✨ Features
 
-```text
- -------------------------------------------------------
-|                    THE Shelf                          |
-|                 A House Library                       |
----------------------------------------------------------
-| Search Books... | Sort ▼ | + Add a Book              |
----------------------------------------------------------
-| 📕 Book Cover | 📘 Book Cover | 📗 Book Cover         |
----------------------------------------------------------
-| Click a book to view full details                     |
----------------------------------------------------------
-```
+### 📖 Book Management
+
+* Add new books to your personal library
+* Edit existing book information
+* Delete books from the collection
+* View complete book details
+* Store and manage books using a database
+
+### 🔍 Search and Sorting
+
+Search books by:
+
+* Book title
+* Author name
+
+Sort books by:
+
+* Recently Added
+* Title (A–Z)
+* Author (A–Z)
+* Highest Rating
+
+### ⭐ Rating and Reviews
+
+* Rate books using a 5-star rating system
+* Write and manage personal book reviews
+* View ratings and reviews in the book details section
+
+### 🖼️ Book Cover Management
+
+Add book covers using:
+
+* Image URL
+* Local file upload
+
+Additional features:
+
+* Preview cover images before saving
+* Display book covers in a digital bookshelf layout
+
+### 👀 Book Details
+
+Click on a book to view detailed information in a catalog-style modal, including:
+
+* Book Cover
+* Title
+* Author
+* Rating
+* Review
+
+### 💻 Desktop Application
+
+The project has been enhanced using **Electron.js** to provide a desktop application experience.
+
+* Run the application as a desktop app
+* Access the frontend through a native application window
+* Integrate frontend and backend functionality
+* Package the application for desktop distribution
+* Provide a standalone application experience without manually opening the website in a browser
+
+### 🗄️ Backend and Database
+
+The project now includes backend functionality for managing application data.
+
+* Backend server using Node.js
+* REST-style communication between frontend and backend
+* Database connectivity using MySQL
+* Persistent storage for book information
+* CRUD operations:
+
+  * Create
+  * Read
+  * Update
+  * Delete
 
 ---
 
 ## 🛠️ Technologies Used
 
+### Frontend
+
 * HTML5
 * CSS3
 * JavaScript (Vanilla JS)
+
+### Backend
+
+* Node.js
+* Express.js
+* MySQL
+* MySQL2
+* CORS
+* dotenv
+
+### Desktop Application
+
+* Electron.js
+
+### Development Tools
+
+* Visual Studio Code
+* MySQL Workbench
+* SQLTools
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-The-Shelf/
+The_Shelf/
 │
-├── index.html
-├── style.css
-├── script.js
-├── assets/
-│   └── images/
-└── README.md
+├── FrontEnd/
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   └── assets/
+│       └── images/
+│
+├── BackEnd/
+│   ├── server.js
+│   ├── database.js
+│   └── ...
+│
+├── electron/
+│   ├── main.js
+│   └── preload.js
+│
+├── package.json
+├── package-lock.json
+├── .env
+├── README.md
+└── node_modules/
+```
+
+> *Note: The exact project structure may vary depending on the final organization of your frontend, backend, and Electron files.*
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Jtithy/The_Shelf.git
+```
+
+Move into the project directory:
+
+```bash
+cd The_Shelf
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+If required, install the main dependencies:
+
+```bash
+npm install express mysql2 cors dotenv electron
 ```
 
 ---
 
-## ⚙️ How It Works
+## 🗄️ Database Setup
 
-### Add a Book
+Make sure **MySQL Server** is running.
 
-1. Click **+ Add a Book**.
-2. Enter:
+Create a database for the application:
 
-   * Book Title
-   * Author
-   * Cover Image URL or Upload Image
-   * Rating
-   * Review
-3. Click **Shelve it** to save the book.
+```sql
+CREATE DATABASE the_shelf;
+```
+
+Select the database:
+
+```sql
+USE the_shelf;
+```
+
+Create the required tables based on your application's database schema.
 
 ---
 
-### Search Books
+## 🔐 Environment Variables
+
+Create a `.env` file in the project root.
+
+Example:
+
+```env
+DB_HOST=127.0.0.1
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=the_shelf
+DB_PORT=3306
+```
+
+> ⚠️ Never upload your `.env` file or database password to GitHub.
+
+You can add the following to your `.gitignore` file:
+
+```text
+node_modules/
+.env
+```
+
+---
+
+## ▶️ Running the Application
+
+### Run the Backend Server
+
+From the project directory:
+
+```bash
+node server.js
+```
+
+Or, if your backend file is located in another directory:
+
+```bash
+node BackEnd/server.js
+```
+
+The backend server will handle communication between the application and the MySQL database.
+
+---
+
+### Run the Desktop Application
+
+Start the Electron application:
+
+```bash
+npm start
+```
+
+Depending on your `package.json` configuration, you may also use:
+
+```bash
+npm run electron
+```
+
+The application should open in a native desktop window.
+
+---
+
+## 🏗️ Building the Desktop Application
+
+After configuring Electron and an application packaging tool, the project can be built into a distributable desktop application.
+
+Typical build command:
+
+```bash
+npm run build
+```
+
+The generated application can then be distributed and installed on supported desktop systems.
+
+---
+
+## 🔄 Application Workflow
+
+```text
+                    ┌─────────────────┐
+                    │   Desktop App   │
+                    │   Electron.js   │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │    Frontend     │
+                    │ HTML / CSS / JS │
+                    └────────┬────────┘
+                             │
+                       HTTP / API
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ Backend Server  │
+                    │ Node.js/Express │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ MySQL Database  │
+                    └─────────────────┘
+```
+
+---
+
+## 📖 How It Works
+
+### Add a Book
+
+1. Open **The Shelf** application.
+2. Click **+ Add a Book**.
+3. Enter:
+
+   * Book Title
+   * Author
+   * Cover Image URL or upload an image
+   * Rating
+   * Review
+4. Click **Shelve It**.
+5. The book information is saved and displayed on your digital bookshelf.
+
+---
+
+### 🔍 Search Books
 
 Use the search bar to instantly find books by:
 
@@ -92,7 +330,7 @@ Use the search bar to instantly find books by:
 
 ---
 
-### Sort Books
+### 📂 Sort Books
 
 Choose one of the available sorting options:
 
@@ -103,9 +341,9 @@ Choose one of the available sorting options:
 
 ---
 
-### View Details
+### 📄 View Book Details
 
-Click any book to open a catalog-style detail card displaying:
+Click on a book to open a detailed catalog-style view containing:
 
 * Book Cover
 * Title
@@ -115,76 +353,84 @@ Click any book to open a catalog-style detail card displaying:
 
 ---
 
-## ▶️ Running the Project
+### ✏️ Edit and Delete
 
-### Method 1: Open Directly
+Users can manage their collection by:
 
-1. Download or clone the repository.
-2. Open `index.html` in your preferred web browser.
+* Editing existing book information
+* Updating ratings or reviews
+* Deleting books that are no longer needed
 
-### Method 2: Using VS Code Live Server
-
-1. Open the project folder in Visual Studio Code.
-2. Install the **Live Server** extension.
-3. Right-click on `index.html`.
-4. Select **Open with Live Server**.
+All changes are synchronized with the application's data storage.
 
 ---
 
 ## 📚 Concepts Practiced
 
+This project demonstrates practical knowledge of:
+
+### Frontend Development
+
 * HTML Semantic Elements
-* CSS Flexbox & Grid
+* CSS Flexbox
+* CSS Grid
 * Responsive Web Design
-* JavaScript DOM Manipulation
+* DOM Manipulation
 * Event Handling
-* Dynamic Content Rendering
 * Form Validation
 * Modal Windows
+* Dynamic Content Rendering
 * Image Preview
+
+### JavaScript
+
+* Arrays and Objects
+* Functions
+* Event Listeners
 * Searching Algorithms
 * Sorting Data
-* CRUD Operations (Create, Read, Update, Delete)
+* CRUD Operations
+* Asynchronous Programming
+* API Communication
 
----
+### Backend Development
 
-## 🎯 Example Workflow
+* Node.js
+* Express.js
+* REST APIs
+* Middleware
+* Environment Variables
+* Database Connectivity
 
-```text
-Open Website
-        │
-        ▼
-Click "Add a Book"
-        │
-        ▼
-Fill Book Information
-        │
-        ▼
-Upload Cover / Paste URL
-        │
-        ▼
-Give Rating
-        │
-        ▼
-Write Review
-        │
-        ▼
-Shelve It
-        │
-        ▼
-Book Appears on Your Shelf
-        │
-        ▼
-Search • Sort • View • Edit • Delete
-```
+### Database
+
+* MySQL
+* Database Design
+* SQL Queries
+* CRUD Operations
+* Persistent Data Storage
+
+### Desktop Development
+
+* Electron.js
+* Desktop Application Architecture
+* Native Application Windows
+* Integrating Web Technologies into Desktop Applications
+* Application Packaging and Distribution
 
 ---
 
 ## 🔮 Future Improvements
 
-* 💾 Store books using Local Storage
-* ☁️ Cloud database integration
-* 📖 Reading status (Read, Reading, Want to Read)
+Possible future features include:
+
+* 👤 User authentication and multiple accounts
+* 🔐 Secure password authentication
+* 📚 Reading status:
+
+  * Read
+  * Currently Reading
+  * Want to Read
 * 🏷️ Book categories and genres
 * ❤️ Favorite books section
 * 📅 Reading progress tracker
@@ -192,7 +438,11 @@ Search • Sort • View • Edit • Delete
 * 🌙 Dark/Light mode
 * 🔖 Bookmark feature
 * 📤 Export and import library data
-* 👥 User authentication and multiple accounts
+* ☁️ Cloud database synchronization
+* 🔎 Advanced filtering
+* 📱 Mobile application version
+* 🖥️ Additional desktop platform support
+* 🔄 Automatic updates for the desktop application
 
 ---
 
@@ -200,22 +450,32 @@ Search • Sort • View • Edit • Delete
 
 **Tithy**
 
-Created as a front-end web development project to practice modern HTML, CSS, and JavaScript by building a fully interactive personal library application.
+Created as a full-stack software development project to practice modern web technologies, backend development, database integration, and desktop application development.
+
+The project began as a **frontend personal library application** and was later expanded with a **backend server, MySQL database integration, Electron.js, and desktop application functionality**.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to fork the repository, improve the design, add new features, fix bugs, and submit a pull request.
+Contributions are welcome!
+
+Feel free to:
+
+1. Fork the repository.
+2. Create a new branch.
+3. Improve the application.
+4. Fix bugs or add features.
+5. Submit a pull request.
 
 ---
 
 ## 📄 License
 
-This project is open-source and intended for educational and learning purposes.
+This project is open-source and intended for **educational and learning purposes**.
 
 ---
 
 ### ⭐ If you found this project useful, consider giving it a star on GitHub!
 
-**Built with ❤️ using HTML, CSS & JavaScript**
+**Built with ❤️ using HTML, CSS, JavaScript, Node.js, MySQL, and Electron.js.**
