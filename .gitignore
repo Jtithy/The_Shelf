@@ -1,25 +1,23 @@
 # Environment variables
 Backend/.env
 
-#Electron dependencies
-Electron/node_modules/
-
 # Node.js dependencies
 Backend/node_modules/
+Electron/node_modules/
+node_modules/
 
 # SQLite database
 Backend/data/
-Backend/data/*.db
-Backend/data/*.db-shm
-Backend/data/*.db-wal
 
 # Debug / logs
 *.log
 npm-debug.log*
 
+# Build output
+dist/
+
 # VS Code
 .vscode/
-.vscode/*
 
 # OS files
 .DS_Store

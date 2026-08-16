@@ -31,12 +31,25 @@
         ]
       },
       {
+        "from": "../Backend/node_modules",
+        "to": "Backend/node_modules"
+      },
+      {
         "from": "../Frontend",
-        "to": "Frontend"
+        "to": "Frontend",
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "win": {
       "target": "nsis"
     }
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
   }
 }
